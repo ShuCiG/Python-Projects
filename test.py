@@ -524,6 +524,7 @@ for row in matrix:
     print(*[str(x).ljust(3) for x in row])
 '''
 
+'''
 # put your python code here
 n = int(input())
 matrix = [[int(i) for i in input().split()] for _ in range(n)]
@@ -541,4 +542,50 @@ if not flag:
     print('NO')
 else:
     print('YES')
+'''
+
+'''
+Filling with a spiral 🌀🌶️🌶️
+Two natural numbers n and m are fed into the program. Write a program that creates an n × m matrix, filling it with a ‘spiral’ according to the pattern.
+
+Input format
+The program takes two natural numbers n and m as input on a single line – the number of rows and columns in the matrix.
+'''
+n, m = [int(i) for i in input().split()]
+
+matrix = [[0] * m for _ in range(n)]
+
+count = 1
+
+top, bottom = 0, n - 1
+left, right = 0, m - 1
+
+while count <= n * m:
+    for x in range(left, right + 1):
+        matrix[top][x] = count
+        count += 1
+    top += 1
+    if top > bottom:
+        break
         
+    for y in range(top, bottom + 1):
+        matrix[y][right] = count
+        count += 1
+    right -= 1
+    if left > right:
+        break
+        
+    for x in range(right, left - 1, -1):
+        matrix[bottom][x] = count
+        count += 1
+    bottom -= 1
+    if top > bottom:
+        break
+        
+    for y in range(bottom, top - 1, -1):
+        matrix[y][left] = count
+        count += 1
+    left += 1
+    
+for row in matrix:
+    print(*row)
